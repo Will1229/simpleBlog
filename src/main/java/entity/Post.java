@@ -13,7 +13,7 @@ public class Post extends Base {
 
     private User user;
 
-    private String postTitle;
+    private String title;
 
     private String content;
 }

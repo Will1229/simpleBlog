@@ -27,3 +27,5 @@ build
 gradle
 target
 *.iml
+out
+gradlew*

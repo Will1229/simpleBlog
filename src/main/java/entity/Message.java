@@ -1,23 +1,29 @@
 package entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@AllArgsConstructor
+import java.util.ArrayList;
+import java.util.List;
+
 @NoArgsConstructor
 public class Message {
+
+    public Message(final String message) {
+        this.message = message;
+    }
+
+    public Message(final List<Post> posts) {
+        this.posts = posts;
+    }
+
     @Getter
     @Setter
     private String message;
 
     @Getter
     @Setter
-    private String status;
-
-    @Getter
-    @Setter
-    private Post post;
+    private List<Post> posts = new ArrayList<>();
 }
 

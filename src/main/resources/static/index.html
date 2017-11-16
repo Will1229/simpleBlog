@@ -1,10 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+<script src="https://unpkg.com/vue"></script>
+
+
 <head>
     <meta charset="UTF-8">
     <title>Simple Blog</title>
+    <link rel="stylesheet" href="css/main.css">
 </head>
-<body>
+<body onload="getAllPost()">
+<!--<body onload="searchButton()">-->
+<script src="js/app.js"></script>
+
+<h1> Welcome to Simple Blog!</h1>
+<hr>
+
+<input id="keyword" type="text" placeholder="keyword">
+<button onclick="searchButton()">Search</button>
+
+
+<a style='text-decoration:none;' href="editPost.html">
+    <button onclick="newButton()">New Blog</button>
+</a>
+
+<br>
+<br>
+
+<!-- component template -->
+<script type="text/x-template" id="grid-template">
+    <table>
+        <thead>
+        <tr>
+            <th v-for="key in columns"
+                @click="sortBy(key)"
+                :class="{ active: sortKey == key }">
+                {{ key | capitalize }}
+                <span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'">
+          </span>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="entry in filteredData">
+            <td v-for="key in columns">
+                <template v-if="key === 'action' || key === 'title'">
+                    <span v-html="entry[key]"></span>
+                </template>
+                <template v-else>
+                    {{entry[key]}}
+                </template>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</script>
+
+
+<div id="blogList">
+    <blog-grid id="bloggrid"
+               :data="gridData"
+               :columns="gridColumns"
+               :filter-key="searchQuery">
+    </blog-grid>
+</div>
 
 </body>
 </html>
